@@ -15,15 +15,18 @@ class Tasks extends Component {
   }
   // start()
 
+  componentDidMount() {
+    this.getTasks();
+  }
+
   getTasks() {
     fetch(api_url)
       .then((response) => response.json())
       .then((response_items) => {
-        this.setState({ items: response_items });
+        this.setState({
+          items: response_items.reverse(),
+        });
       });
-  }
-  componentDidMount() {
-    this.getTasks();
   }
 
   updateTasks(item) {
@@ -33,7 +36,6 @@ class Tasks extends Component {
       items: _items,
     });
   }
-
   render() {
     return (
       <div>
