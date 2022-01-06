@@ -12,22 +12,41 @@ export default class NewTask extends Component {
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
   }
+
   handleSubmit(event) {
     event.preventDefault();
     this.formSubmit(event.target);
   }
+
   handleTitleChange(event) {
     this.setState({
       title: event.target.value,
     });
   }
+
   handleDescriptionChange(event) {
     this.setState({
       description: event.target.value,
     });
   }
+
+  // async formSubmit(formData) {
+  //   var data = new FormData(formData);
+
+  //   await fetch(this.state.api_url, {
+  //     method: "POST",
+  //     mode: "cors",
+  //     body: data,
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => this.props.updateTasks(response));
+  // }
+
   async formSubmit(formData) {
-    var data = new FormData(formData);
+    var data = new FormData();
+    data.append("task[title]", this.state.title);
+    data.append("task[description]", this.state.description);
+
     await fetch(this.state.api_url, {
       method: "POST",
       mode: "cors",
@@ -36,7 +55,6 @@ export default class NewTask extends Component {
       .then((response) => response.json())
       .then((response) => this.props.updateTasks(response));
   }
-
   render() {
     return (
       <div className="container">
@@ -53,6 +71,7 @@ export default class NewTask extends Component {
                 className="form-control"
                 id="title"
                 placeholder="Add Title"
+                value={this.state.title}
                 onChange={this.handleTitleChange}
               />
             </div>
@@ -80,6 +99,7 @@ export default class NewTask extends Component {
                 className="form-control"
                 id="description"
                 placeholder="Description"
+                value={this.state.description}
                 onChange={this.handleDescriptionChange}
               />
             </div>
@@ -115,9 +135,10 @@ export default class NewTask extends Component {
 
           <div className="form-group row my-3">
             <div className="col-sm-10">
-              <button type="submit" className="btn btn-primary">
+              {/* <button type="submit" className="btn btn-primary">
                 Create
-              </button>
+              </button> */}
+              <input type="submit" className="btn btn-primary" value="Submit" />
             </div>
           </div>
         </form>
