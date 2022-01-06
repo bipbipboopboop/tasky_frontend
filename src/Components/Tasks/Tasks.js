@@ -8,7 +8,7 @@ class Tasks extends Component {
     super(props);
 
     this.state = {
-      items: [{ id: 1, title: "Hello", description: "This is a description" }],
+      items: [],
     };
     this.updateTasks = this.updateTasks.bind(this);
   }
