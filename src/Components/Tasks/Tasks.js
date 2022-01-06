@@ -19,6 +19,13 @@ class Tasks extends Component {
     this.getTasks();
   }
 
+  // componentDidMount() {
+  //   // Simple GET request using fetch
+  //   fetch(api_url)
+  //     .then((response) => response.json())
+  //     .then((data) => this.setState({ items: data }));
+  //   console.log(this.items);
+  // }
   getTasks() {
     fetch(api_url)
       .then((response) => response.json())
@@ -37,6 +44,7 @@ class Tasks extends Component {
     });
   }
   render() {
+    console.log(this.state.items);
     return (
       <div>
         <NewTask api_url={api_url} updateTasks={this.updateTasks} />
