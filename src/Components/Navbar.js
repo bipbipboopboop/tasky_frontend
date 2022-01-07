@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoggedIn, setisLoggedIn] = useState(true);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <Link to="/tasks" className="navbar-brand">
           Task
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -22,11 +23,11 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           {isLoggedIn ? (
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="#">
                   Calendar
                 </a>
-              </li>
+              </li> */}
               <form className="d-flex">
                 <input
                   className="form-control me-2"
@@ -40,21 +41,21 @@ const Navbar = () => {
               </form>
             </ul>
           ) : (
-            <></>
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
           )}
           {isLoggedIn ? (
             <>
-              <button className="btn btn-outline-success mx-2" type="submit">
+              <Link to="/tasks/new" className="btn btn-outline-success mx-2">
                 Create
-              </button>
-              <button className="btn btn-outline-success mx-2" type="submit">
+              </Link>
+              <Link to="/" className="btn btn-outline-success mx-2">
                 Sign Out
-              </button>
+              </Link>
             </>
           ) : (
-            <button className="btn btn-outline-success mx-2" type="submit">
+            <Link to="/signin" className="btn btn-outline-success mx-2">
               Sign In
-            </button>
+            </Link>
           )}
         </div>
       </div>

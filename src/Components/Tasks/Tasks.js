@@ -11,7 +11,7 @@ class Tasks extends Component {
     this.state = {
       items: [],
     };
-    this.updateTasks = this.updateTasks.bind(this);
+    // this.updateTasks = this.updateTasks.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
   }
   // start()
@@ -37,13 +37,13 @@ class Tasks extends Component {
       });
   }
 
-  updateTasks(item) {
-    let _items = this.state.items;
-    _items.unshift(item);
-    this.setState({
-      items: _items,
-    });
-  }
+  // updateTasks(item) {
+  //   let _items = this.state.items;
+  //   _items.unshift(item);
+  //   this.setState({
+  //     items: _items,
+  //   });
+  // }
 
   deleteItem(item) {
     var deleteURL = api_url + `/${item.id}`;
@@ -62,10 +62,9 @@ class Tasks extends Component {
   }
   render() {
     // console.log(this.state.items);
+    // <NewTask api_url={api_url} updateTasks={this.updateTasks} />;
     return (
       <div>
-        <NewTask api_url={api_url} updateTasks={this.updateTasks} />
-
         <div className="d-flex flex-row">
           {this.state.items.map((item) => (
             <div className="p-2">
