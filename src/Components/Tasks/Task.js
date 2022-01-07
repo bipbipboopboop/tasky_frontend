@@ -16,7 +16,7 @@ const Task = (props) => {
     props.deleteItem(props.item);
   }
   return (
-    <div className="card m-3" style={{ width: "10rem" }}>
+    <div className="card" style={{ width: "20rem", borderRadius: "1rem" }}>
       <div className="card-body">
         <h5 className="card-title">{props.item.title}</h5>
         <p className="card-text">{props.item.description}</p>

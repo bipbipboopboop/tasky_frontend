@@ -16,6 +16,8 @@ export default class NewTask extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.formSubmit(event.target);
+    this.state.title = "";
+    this.state.description = "";
   }
 
   handleTitleChange(event) {
@@ -57,26 +59,30 @@ export default class NewTask extends Component {
   }
   render() {
     return (
-      <div className="container">
-        <h1>New Task</h1>
-        <p>Please fill in the info below</p>
-        <form onSubmit={this.handleSubmit} id="tasks_form">
-          <div className="form-group row my-2">
-            <label htmlFor="title" className="col-sm-2 col-form-label">
-              Title
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                placeholder="Add Title"
-                value={this.state.title}
-                onChange={this.handleTitleChange}
-              />
+      <div className="row my-5 justify-content-center align-items-center">
+        <div
+          className="card p-5"
+          style={{ width: "50rem", borderRadius: "1rem" }}
+        >
+          <h1>New Task</h1>
+          <p>Please fill in the info below</p>
+          <form onSubmit={this.handleSubmit} id="tasks_form">
+            <div className="form-group row my-2">
+              <label htmlFor="title" className="col-sm-2 col-form-label">
+                Title
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  placeholder="Add Title"
+                  value={this.state.title}
+                  onChange={this.handleTitleChange}
+                />
+              </div>
             </div>
-          </div>
-          {/* <div className="form-group row my-2">
+            {/* <div className="form-group row my-2">
             <label htmlFor="category" className="col-sm-2 col-form-label">
               Category
             </label>
@@ -89,22 +95,22 @@ export default class NewTask extends Component {
               />
             </div>
           </div> */}
-          <div className="form-group row my-2">
-            <label htmlFor="description" className="col-sm-2 col-form-label">
-              Description
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                placeholder="Description"
-                value={this.state.description}
-                onChange={this.handleDescriptionChange}
-              />
+            <div className="form-group row my-2">
+              <label htmlFor="description" className="col-sm-2 col-form-label">
+                Description
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="description"
+                  placeholder="Description"
+                  value={this.state.description}
+                  onChange={this.handleDescriptionChange}
+                />
+              </div>
             </div>
-          </div>
-          {/* <div className="form-group row my-2">
+            {/* <div className="form-group row my-2">
             <div className="col">
               <label htmlFor="start" className="col-sm-2 col-form-label">
                 Start
@@ -133,15 +139,20 @@ export default class NewTask extends Component {
             </div>
           </div> */}
 
-          <div className="form-group row my-3">
-            <div className="col-sm-10">
-              {/* <button type="submit" className="btn btn-primary">
+            <div className="form-group row my-3">
+              <div className="col-sm-10">
+                {/* <button type="submit" className="btn btn-primary">
                 Create
               </button> */}
-              <input type="submit" className="btn btn-primary" value="Submit" />
+                <input
+                  type="submit"
+                  className="btn btn-primary"
+                  value="Submit"
+                />
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }

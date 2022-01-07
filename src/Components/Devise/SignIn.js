@@ -2,12 +2,12 @@ import React from "react";
 
 const SignUp = () => {
   return (
-    <div className="row my-5 align-items-center justify-content-center">
+    <div className="row my-5 justify-content-center align-items-center">
       <div
         className="card p-5"
-        style={{ width: "25rem", borderRadius: "1rem" }}
+        style={{ width: "20rem", borderRadius: "1rem" }}
       >
-        <h2>Sign Up</h2>
+        <h1>Sign In</h1>
         <form>
           <div class="form-group my-2">
             <label for="email">Email address</label>
@@ -23,7 +23,7 @@ const SignUp = () => {
             </small>
           </div>
           <div class="form-group my-2">
-            <label for="password">Password (Minimum 6 Characters)</label>
+            <label for="password">Password</label>
             <input
               type="password"
               class="form-control"
@@ -31,18 +31,9 @@ const SignUp = () => {
               placeholder="Enter your password"
             />
           </div>
-          <div class="form-group my-2">
-            <label for="password">Confirm Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="Enter your password again"
-            />
-          </div>
 
           <button type="submit" class="btn btn-primary my-2">
-            Sign Me Up!
+            Sign In
           </button>
         </form>
       </div>
