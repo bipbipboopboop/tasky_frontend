@@ -12,11 +12,22 @@ isCompleted:boolean
 import React from "react";
 
 const Task = (props) => {
+  function handleDelete() {
+    props.deleteItem(props.item);
+  }
   return (
-    <ul>
-      <li>{props.item.title}</li>
-      <li>{props.item.description}</li>
-    </ul>
+    <div className="card m-3" style={{ width: "10rem" }}>
+      <div className="card-body">
+        <h5 className="card-title">{props.item.title}</h5>
+        <p className="card-text">{props.item.description}</p>
+        <a href="#" className="card-link">
+          Edit
+        </a>
+        <button className="btn btn-primary mx-2" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
+    </div>
   );
 };
 

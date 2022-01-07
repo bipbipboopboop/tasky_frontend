@@ -12,6 +12,7 @@ class Tasks extends Component {
       items: [],
     };
     this.updateTasks = this.updateTasks.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
   // start()
 
@@ -43,16 +44,35 @@ class Tasks extends Component {
       items: _items,
     });
   }
+
+  deleteItem(item) {
+    var deleteURL = api_url + `/${item.id}`;
+    fetch(deleteURL, {
+      method: "DELETE",
+    }).then(() => {
+      // Client side delete
+      //To be completed
+      var _items = this.state.items;
+      var index = _items.indexOf(item);
+      _items.splice(index, 1);
+      this.setState({
+        items: _items,
+      });
+    });
+  }
   render() {
-    console.log(this.state.items);
+    // console.log(this.state.items);
     return (
       <div>
         <NewTask api_url={api_url} updateTasks={this.updateTasks} />
-        <ul>
+
+        <div className="d-flex flex-row">
           {this.state.items.map((item) => (
-            <Task key={item.id} item={item} />
+            <div className="p-2">
+              <Task key={item.id} item={item} deleteItem={this.deleteItem} />
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     );
   }

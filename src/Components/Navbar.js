@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Navbar = () => {
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -37,15 +38,20 @@ const Navbar = () => {
               </button>
             </form>
           </ul>
-          <button className="btn btn-outline-success mx-2" type="submit">
-            Sign In
-          </button>
-          <button className="btn btn-outline-success mx-2" type="submit">
-            Create
-          </button>
-          <button className="btn btn-outline-success mx-2" type="submit">
-            Sign Out
-          </button>
+          {isLoggedIn ? (
+            <>
+              <button className="btn btn-outline-success mx-2" type="submit">
+                Create
+              </button>
+              <button className="btn btn-outline-success mx-2" type="submit">
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <button className="btn btn-outline-success mx-2" type="submit">
+              Sign In
+            </button>
+          )}
         </div>
       </div>
     </nav>
