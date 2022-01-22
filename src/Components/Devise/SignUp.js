@@ -58,37 +58,37 @@ export default class SignUp extends Component {
         >
           <h2>Sign Up</h2>
           <form onSubmit={this.handleSubmit}>
-            <div class="form-group my-2">
+            <div className="form-group my-2">
               <label for="email">Email address</label>
               <input
                 type="email"
-                class="form-control"
+                className="form-control"
                 id="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
                 value={this.state.email}
                 onChange={this.handleEmailChange}
               />
-              <small id="emailHelp" class="form-text text-muted">
+              <small id="emailHelp" className="form-text text-muted">
                 We'll never share your email with anyone else.
               </small>
             </div>
-            <div class="form-group my-2">
+            <div className="form-group my-2">
               <label for="password">Password (Minimum 6 Characters)</label>
               <input
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="password"
                 placeholder="Enter your password"
                 value={this.state.password}
                 onChange={this.handlePasswordChange}
               />
             </div>
-            <div class="form-group my-2">
+            <div className="form-group my-2">
               <label for="password">Confirm Password</label>
               <input
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="password"
                 placeholder="Enter your password again"
                 value={this.state.password}
@@ -96,7 +96,7 @@ export default class SignUp extends Component {
               />
             </div>
 
-            <button type="submit" class="btn btn-primary my-2">
+            <button type="submit" className="btn btn-primary my-2">
               Sign Me Up!
             </button>
           </form>

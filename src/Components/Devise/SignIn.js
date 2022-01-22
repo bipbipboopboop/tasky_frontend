@@ -67,7 +67,7 @@ export default class SignIn extends Component {
               <label for="email">Email address</label>
               <input
                 type="email"
-                class="form-control"
+                className="form-control"
                 id="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
@@ -78,11 +78,11 @@ export default class SignIn extends Component {
                 We'll never share your email with anyone else.
               </small>
             </div>
-            <div class="form-group my-2">
+            <div className="form-group my-2">
               <label for="password">Password</label>
               <input
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="password"
                 placeholder="Enter your password"
                 value={this.state.password}
