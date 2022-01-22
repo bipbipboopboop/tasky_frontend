@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [isLoggedIn, setisLoggedIn] = useState(true);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">

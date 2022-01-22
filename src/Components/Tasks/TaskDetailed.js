@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 {
   /* <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,12 +21,12 @@ const TaskDetailed = (props) => {
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
-          <a href="#" className="card-link">
+          <Link to="#" className="card-link">
             Edit
-          </a>
-          <a href="#" className="card-link">
-            Go Back
-          </a>
+          </Link>
+          <Link to="/tasks" className="card-link">
+            Go back
+          </Link>
         </div>
       </div>
     </div>

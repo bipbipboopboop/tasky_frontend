@@ -26,10 +26,16 @@ function App() {
         <Route exact path="/tasks" element={<Tasks />} />
       </Routes>
       <Routes>
+        <Route path="/task/:id" element={<TaskDetailed />} />
+      </Routes>
+      <Routes>
         <Route exact path="/tasks/new" element={<NewTask />} />
       </Routes>
       <Routes>
         <Route exact path="/signin" element={<SignIn />} />
+      </Routes>
+      <Routes>
+        <Route exact path="/signup" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );
