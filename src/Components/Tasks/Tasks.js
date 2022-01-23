@@ -59,54 +59,56 @@ class Tasks extends Component {
   render() {
     return (
       <div
-        className="d-flex flex-column"
+        className="d-flex justify-content-center"
         style={{
+          backgroundColor: "#f7e7ce",
+          minHeight: "100vh",
+          height: "100%",
           // position: "absolute",
           // left: "40%",
-          justifyContent: "center",
-          width: "100%",
-          backgroundColor: "#f7e7ce",
         }}
       >
-        <h2>Tasks to be completed</h2>
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          {/* <li className="nav-item">
+        <div className="d-flex flex-column">
+          <h2>Tasks to be completed</h2>
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            {/* <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="#">
                   Calendar
                 </a>
               </li> */}
-          <form className="d-flex">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search for Task"
-              aria-label="Search for Task"
-              onChange={this.setSearchTerm}
-            />
-          </form>
-        </ul>
-        {/* {this.state.items.map((item) => (
+            <form className="d-flex">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search for Task"
+                aria-label="Search for Task"
+                onChange={this.setSearchTerm}
+              />
+            </form>
+          </ul>
+          {/* {this.state.items.map((item) => (
           <div className="p-2">
             <Task key={item.id} item={item} deleteItem={this.deleteItem} />
           </div>
         ))} */}
-        {this.state.items
-          .filter((val) => {
-            if (this.state.searchTerm == "") {
-              return val;
-            } else if (
-              val.title
-                .toLowerCase()
-                .includes(this.state.searchTerm.toLowerCase())
-            ) {
-              return val;
-            }
-          })
-          .map((item) => (
-            <div className="p-2">
-              <Task key={item.id} item={item} deleteItem={this.deleteItem} />
-            </div>
-          ))}
+          {this.state.items
+            .filter((val) => {
+              if (this.state.searchTerm == "") {
+                return val;
+              } else if (
+                val.title
+                  .toLowerCase()
+                  .includes(this.state.searchTerm.toLowerCase())
+              ) {
+                return val;
+              }
+            })
+            .map((item) => (
+              <div className="p-2">
+                <Task key={item.id} item={item} deleteItem={this.deleteItem} />
+              </div>
+            ))}
+        </div>
       </div>
     );
   }

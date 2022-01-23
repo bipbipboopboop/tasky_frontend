@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [isLoggedIn, setisLoggedIn] = useState(true);
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav
+      className="navbar navbar-expand-lg navbar-light"
+      style={{ backgroundColor: "coral" }}
+    >
       <div className="container-fluid">
         <Link to="/tasks" className="navbar-brand">
           Task
@@ -25,15 +28,15 @@ const Navbar = () => {
 
           {isLoggedIn ? (
             <>
-              <Link to="/newtask" className="btn btn-outline-success mx-2">
+              <Link to="/newtask" className="btn mx-2">
                 Create
               </Link>
-              <Link to="/" className="btn btn-outline-success mx-2">
+              <Link to="/" className="btn mx-2">
                 Sign Out
               </Link>
             </>
           ) : (
-            <Link to="/signin" className="btn btn-outline-success mx-2">
+            <Link to="/signin" className="btn mx-2">
               Sign In
             </Link>
           )}
