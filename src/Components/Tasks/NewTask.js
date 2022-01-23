@@ -4,7 +4,6 @@ export default class NewTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // api_url: props.api_url,
       api_url: `http://localhost:3001/api/v1/tasks`,
       title: "",
       description: "",
@@ -17,8 +16,6 @@ export default class NewTask extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.formSubmit(event.target);
-    // this.state.title = "";
-    // this.state.description = "";
     this.setState({ title: "", description: "" });
   }
 
@@ -34,18 +31,6 @@ export default class NewTask extends Component {
     });
   }
 
-  // async formSubmit(formData) {
-  //   var data = new FormData(formData);
-
-  //   await fetch(this.state.api_url, {
-  //     method: "POST",
-  //     mode: "cors",
-  //     body: data,
-  //   })
-  //     .then((response) => response.json())
-  //     .then((response) => this.props.updateTasks(response));
-  // }
-
   async formSubmit(formData) {
     var data = new FormData();
     data.append("task[title]", this.state.title);
@@ -56,8 +41,6 @@ export default class NewTask extends Component {
       mode: "cors",
       body: data,
     });
-    // .then((response) => response.json())
-    // .then((response) => this.props.updateTasks(response));
   }
   render() {
     return (

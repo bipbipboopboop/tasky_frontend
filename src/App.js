@@ -27,12 +27,11 @@ function App() {
         <Route exact path="/tasks" element={<Tasks />} />
       </Routes>
       <Routes>
-        <Route path="/tasks/:id" element={<TaskDetailed />} />
+        <Route path="/newtask" element={<NewTask />} />
       </Routes>
       <Routes>
-        <Route exact path="/tasks/new" element={<NewTask />} />
+        <Route path="/tasks/:id" element={<TaskDetailed />} />
       </Routes>
-
       <Routes>
         <Route exact path="/signin" element={<SignIn />} />
       </Routes>

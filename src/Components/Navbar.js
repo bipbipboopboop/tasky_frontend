@@ -45,7 +45,7 @@ const Navbar = () => {
           )}
           {isLoggedIn ? (
             <>
-              <Link to="/tasks/new" className="btn btn-outline-success mx-2">
+              <Link to="/newtask" className="btn btn-outline-success mx-2">
                 Create
               </Link>
               <Link to="/" className="btn btn-outline-success mx-2">
