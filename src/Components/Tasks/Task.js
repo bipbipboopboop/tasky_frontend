@@ -16,6 +16,7 @@ const Task = (props) => {
   function handleDelete() {
     props.deleteItem(props.item);
   }
+
   return (
     <div
       className="card"
@@ -44,7 +45,7 @@ const Task = (props) => {
           {props.item.description}
         </p>
       </div>
-      <Link to="/" className="btn btn-secondary m-2">
+      <Link to={`/tasks/${props.item.id}`} className="btn btn-secondary m-2">
         Edit
       </Link>
 

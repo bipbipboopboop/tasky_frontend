@@ -16,7 +16,7 @@ import NewTask from "./Components/Tasks/NewTask";
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="App" style={{ backgroundColor: "#f7e7ce" }}>
         <Navbar />
       </div>
       <Routes>
@@ -27,7 +27,7 @@ function App() {
         <Route exact path="/tasks" element={<Tasks />} />
       </Routes>
       <Routes>
-        <Route path="/task/:id" element={<TaskDetailed />} />
+        <Route path="/tasks/:id" element={<TaskDetailed />} />
       </Routes>
       <Routes>
         <Route exact path="/tasks/new" element={<NewTask />} />

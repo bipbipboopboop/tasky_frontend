@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Task from "./Task";
+
 const api_url = `http://localhost:3001/api/v1/tasks`;
 
 class Tasks extends Component {
@@ -11,13 +12,19 @@ class Tasks extends Component {
       items: [],
     };
     this.deleteItem = this.deleteItem.bind(this);
+    this.viewItem = this.viewItem.bind(this);
   }
   // start()
 
   componentDidMount() {
     this.getTasks();
   }
-
+  viewItem(item) {
+    var viewURL = api_url + `/${item.id}`;
+    fetch(viewURL).then((response) => {
+      console.log(response.json());
+    });
+  }
   getTasks() {
     fetch(api_url)
       .then((response) => response.json())
@@ -43,6 +50,11 @@ class Tasks extends Component {
         items: _items,
       });
     });
+  }
+
+  viewItem(item) {
+    var itemURL = api_url + `/${item.id}`;
+    return itemURL;
   }
   render() {
     return (
