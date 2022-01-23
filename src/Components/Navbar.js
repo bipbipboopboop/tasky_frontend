@@ -2,7 +2,21 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [isLoggedIn, setisLoggedIn] = useState(true);
+  const [isLoggedIn, setisLoggedIn] = useState(
+    localStorage.length > 0 ? true : false
+  );
+  const handleSignOut = () => {
+    fetch("http://localhost:3001/users/sign_out", {
+      headers: {
+        Authorization: localStorage.getItem("authToken"),
+        // "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    }).then(() => {
+      localStorage.clear();
+      setisLoggedIn(false);
+    });
+  };
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light"
@@ -31,9 +45,9 @@ const Navbar = () => {
               <Link to="/newtask" className="btn mx-2">
                 Create
               </Link>
-              <Link to="/" className="btn mx-2">
+              <button className="btn mx-2" onClick={handleSignOut}>
                 Sign Out
-              </Link>
+              </button>
             </>
           ) : (
             <Link to="/signin" className="btn mx-2">

@@ -40,6 +40,9 @@ export default class NewTask extends Component {
       method: "POST",
       mode: "cors",
       body: data,
+      headers: {
+        Authorization: localStorage.getItem("authToken"),
+      },
     });
   }
   render() {

@@ -5,13 +5,6 @@ const api_url = `http://localhost:3001/api/v1/tasks`;
 
 class Tasks extends Component {
   //awake()
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     items: [],
-  //   };
-  //   this.deleteItem = this.deleteItem.bind(this);
-  // }
   constructor(props) {
     super(props);
     this.state = {
@@ -21,14 +14,18 @@ class Tasks extends Component {
     this.deleteItem = this.deleteItem.bind(this);
     this.setSearchTerm = this.setSearchTerm.bind(this);
   }
-  // start()
 
+  // start()
   componentDidMount() {
     this.getTasks();
   }
 
   getTasks() {
-    fetch(api_url)
+    fetch(api_url, {
+      headers: {
+        Authorization: localStorage.getItem("authToken"),
+      },
+    })
       .then((response) => response.json())
       .then((response_items) => {
         this.setState({
@@ -42,6 +39,9 @@ class Tasks extends Component {
     var deleteURL = api_url + `/${item.id}`;
     fetch(deleteURL, {
       method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("authToken"),
+      },
     }).then(() => {
       // Client side delete
       //To be completed

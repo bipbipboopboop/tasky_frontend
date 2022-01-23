@@ -10,7 +10,12 @@ const TaskDetailed = (props) => {
   const [tasks, setTasks] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/v1/tasks/` + id)
+    fetch(`http://localhost:3001/api/v1/tasks/` + id, {
+      headers: {
+        Authorization: localStorage.getItem("authToken"),
+        // "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((response_data) => {
         console.log(response_data);
@@ -29,6 +34,10 @@ const TaskDetailed = (props) => {
       method: "PUT",
       mode: "cors",
       body: data,
+      headers: {
+        Authorization: localStorage.getItem("authToken"),
+        // "Content-Type": "application/json",
+      },
     });
   };
 

@@ -37,7 +37,8 @@ export default class SignIn extends Component {
       mode: "cors",
       body: data,
     }).then((res) => {
-      console.log(res.headers.get("Authorization"));
+      console.log(res.headers.get("Authorization").split(" ")[1]);
+      localStorage.setItem("authToken", res.headers.get("Authorization"));
       // return res.headers.get("Authorization");
       fetch("http://localhost:3001/api/v1/tasks", {
         headers: {
