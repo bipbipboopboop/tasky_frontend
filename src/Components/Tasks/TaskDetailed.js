@@ -18,6 +18,39 @@ const TaskDetailed = (props) => {
       });
   }, []);
 
+  const handlePut = (e) => {
+    e.preventDefault();
+    // console.log(tasks);
+    var data = new FormData();
+    data.append("task[title]", tasks.title);
+    data.append("task[description]", tasks.description);
+
+    fetch(`http://localhost:3001/api/v1/tasks/` + id, {
+      method: "PUT",
+      mode: "cors",
+      body: data,
+    });
+  };
+
+  const emailChange = (e) => {
+    setTasks((prevState) => ({
+      id: prevState.id,
+      title: e.target.value,
+      description: prevState.description,
+      created_at: prevState.created_at,
+      updated_at: prevState.updated_at,
+    }));
+    // console.log(tasks);
+  };
+  const descriptionChange = (e) => {
+    setTasks((prevState) => ({
+      id: prevState.id,
+      title: prevState.title,
+      description: e.target.value,
+      created_at: prevState.created_at,
+      updated_at: prevState.updated_at,
+    }));
+  };
   return (
     <div className="row my-5 justify-content-center align-items-center">
       <div
@@ -26,17 +59,33 @@ const TaskDetailed = (props) => {
       >
         {tasks && (
           <div className="card-body">
-            <h5 className="card-title">{tasks.title}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">Category</h6>
-            <h6 className="card-subtitle mb-2">Date</h6>
-            <h6 className="card-subtitle mb-2 ">Time</h6>
-            <p className="card-text">{tasks.description}</p>
-            <button type="button" class="btn btn-primary m-1">
-              Save
-            </button>
-            <Link to="/tasks" className="btn btn-primary m-1">
-              Go back
-            </Link>
+            <form>
+              <div className="form-group">
+                <label for="title"></label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  value={tasks.title}
+                  onChange={emailChange}
+                />
+                <input
+                  type="text"
+                  className="form-control my-5"
+                  id="description"
+                  value={tasks.description}
+                  onChange={descriptionChange}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handlePut}
+              >
+                Submit
+              </button>
+            </form>
           </div>
         )}
       </div>
