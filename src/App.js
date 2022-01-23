@@ -22,6 +22,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Welcome />} />
       </Routes>
+
       <Routes>
         <Route exact path="/tasks" element={<Tasks />} />
       </Routes>
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route exact path="/tasks/new" element={<NewTask />} />
       </Routes>
+
       <Routes>
         <Route exact path="/signin" element={<SignIn />} />
       </Routes>

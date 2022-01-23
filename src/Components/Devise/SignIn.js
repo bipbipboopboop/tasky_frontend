@@ -4,9 +4,7 @@ export default class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // api_url: props.api_url,
       api_url: `http://localhost:3001/users/sign_in`,
-      // user: { email: "", password: "" },
       email: "",
       password: "",
     };
@@ -17,8 +15,6 @@ export default class SignIn extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.formSubmit(event.target);
-    // this.state.astitle = "";
-    // this.state.description = "";
     this.setState({ email: "", password: "" });
   }
   handleEmailChange(event) {
@@ -30,9 +26,9 @@ export default class SignIn extends Component {
       password: event.target.value,
     });
   }
+
   async formSubmit() {
     var data = new FormData();
-    // data.append("user", this.state.user);
     data.append("user[email]", this.state.email);
     data.append("user[password]", this.state.password);
 
@@ -40,19 +36,15 @@ export default class SignIn extends Component {
       method: "POST",
       mode: "cors",
       body: data,
-    })
-      .then((res) => {
-        console.log(res.headers.get("Authorization"));
-        return res.headers.get("Authorization");
-      })
-      .then((authorization_header) => {
-        console.log(authorization_header);
-        fetch("http://localhost:3001/api/v1/tasks", {
-          headers: {
-            Authorization: authorization_header,
-          },
-        });
+    }).then((res) => {
+      console.log(res.headers.get("Authorization"));
+      // return res.headers.get("Authorization");
+      fetch("http://localhost:3001/api/v1/tasks", {
+        headers: {
+          Authorization: res.headers.get("Authorization"),
+        },
       });
+    });
   }
   render() {
     return (
