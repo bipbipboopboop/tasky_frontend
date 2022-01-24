@@ -193,13 +193,13 @@ const TaskDetailed = () => {
             <div className="form-group row my-3">
               <div className="col-sm-10">
                 <button className="btn btn-primary m-2" onClick={handlePut}>
-                  Done
+                  Save
                 </button>
                 <button
                   className="btn btn-primary m-2"
                   onClick={handleComplete}
                 >
-                  Completed
+                  Mark as Complete
                 </button>
               </div>
             </div>

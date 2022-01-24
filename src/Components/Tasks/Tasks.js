@@ -1,6 +1,7 @@
+import { maxHeight } from "@mui/system";
 import React, { Component } from "react";
 
-import TaskAccordion from "./TaskAccordion";
+import Task from "./Task";
 
 const api_url = `http://localhost:3001/api/v1/tasks`;
 
@@ -92,41 +93,62 @@ class Tasks extends Component {
                 backgroundColor: "#ffaa33",
                 minWidth: "50vh",
                 minHeight: "80vh",
+                maxHeight: "80vh",
               }}
             >
               <div
                 className="card-header"
-                style={{ borderRadius: "1rem", backgroundColor: "#ff7f50" }}
+                style={{
+                  borderRadius: "1rem",
+                  backgroundColor: "#ff7f50",
+                }}
               >
                 To-dos
               </div>
-              {this.state.items
-                .filter((val) => {
-                  if (this.state.searchTerm === "") {
-                    return val;
-                  } else if (
-                    val.tag
-                      .toLowerCase()
-                      .includes(this.state.searchTerm.toLowerCase())
-                  ) {
-                    return val;
-                  }
-                })
-                .filter((item) => {
-                  if (!item.is_urgent && !item.is_completed) {
-                    return item;
-                  }
-                })
-                .map((item) => (
-                  <TaskAccordion
-                    key={item.id}
-                    item={item}
-                    deleteItem={this.deleteItem}
-                  />
-                ))}
+              <div
+                className="card"
+                style={{
+                  borderRadius: "1rem",
+                  backgroundColor: "#ffaa33",
+                  overflow: "auto",
+                }}
+              >
+                {/* <div
+                  className="card-header"
+                  style={{
+                    borderRadius: "1rem",
+                    backgroundColor: "#ff7f50",
+                  }}
+                >
+                  To-dos
+                </div> */}
+                {this.state.items
+                  .filter((val) => {
+                    if (this.state.searchTerm === "") {
+                      return val;
+                    } else if (
+                      val.tag
+                        .toLowerCase()
+                        .includes(this.state.searchTerm.toLowerCase())
+                    ) {
+                      return val;
+                    }
+                  })
+                  .filter((item) => {
+                    if (!item.is_urgent && !item.is_completed) {
+                      return item;
+                    }
+                  })
+                  .map((item) => (
+                    <Task
+                      key={item.id}
+                      item={item}
+                      deleteItem={this.deleteItem}
+                    />
+                  ))}
+              </div>
+              {/* Todo Card */}
             </div>
-            {/* Todo Card */}
-
             {/* Urgent&Completed */}
             <div className="d-flex flex-column">
               {/* Urgent Card */}
@@ -137,6 +159,7 @@ class Tasks extends Component {
                   backgroundColor: "#ffaa33",
                   minWidth: "50vh",
                   minHeight: "37vh",
+                  maxHeight: "37vh",
                 }}
               >
                 <div
@@ -145,39 +168,49 @@ class Tasks extends Component {
                 >
                   Urgent
                 </div>
-                {this.state.items
-                  .filter((val) => {
-                    if (this.state.searchTerm === "") {
-                      return val;
-                    } else if (
-                      val.tag
-                        .toLowerCase()
-                        .includes(this.state.searchTerm.toLowerCase())
-                    ) {
-                      return val;
-                    }
-                  })
-                  .filter((item) => {
-                    if (item.is_urgent) {
-                      return item;
-                    }
-                  })
-                  .map((item) => (
-                    <TaskAccordion
-                      key={item.id}
-                      item={item}
-                      deleteItem={this.deleteItem}
-                    />
-                  ))}
+                <div
+                  className="card"
+                  style={{
+                    borderRadius: "1rem",
+                    backgroundColor: "#ffaa33",
+                    overflow: "auto",
+                  }}
+                >
+                  {this.state.items
+                    .filter((val) => {
+                      if (this.state.searchTerm === "") {
+                        return val;
+                      } else if (
+                        val.tag
+                          .toLowerCase()
+                          .includes(this.state.searchTerm.toLowerCase())
+                      ) {
+                        return val;
+                      }
+                    })
+                    .filter((item) => {
+                      if (item.is_urgent) {
+                        return item;
+                      }
+                    })
+                    .map((item) => (
+                      <Task
+                        key={item.id}
+                        item={item}
+                        deleteItem={this.deleteItem}
+                      />
+                    ))}
+                </div>
               </div>
               {/* Urgent Card */}
               {/* Completed Card */}
               <div
-                className="card p-1"
+                className="card p-1 m-3"
                 style={{
                   borderRadius: "1rem",
                   backgroundColor: "#ffaa33",
                   minHeight: "40vh",
+                  maxHeight: "40vh",
                 }}
               >
                 <div
@@ -186,30 +219,39 @@ class Tasks extends Component {
                 >
                   Completed
                 </div>
-                {this.state.items
-                  .filter((val) => {
-                    if (this.state.searchTerm === "") {
-                      return val;
-                    } else if (
-                      val.tag
-                        .toLowerCase()
-                        .includes(this.state.searchTerm.toLowerCase())
-                    ) {
-                      return val;
-                    }
-                  })
-                  .filter((item) => {
-                    if (item.is_completed) {
-                      return item;
-                    }
-                  })
-                  .map((item) => (
-                    <TaskAccordion
-                      key={item.id}
-                      item={item}
-                      deleteItem={this.deleteItem}
-                    />
-                  ))}
+                <div
+                  className="card"
+                  style={{
+                    borderRadius: "1rem",
+                    backgroundColor: "#ffaa33",
+                    overflow: "auto",
+                  }}
+                >
+                  {this.state.items
+                    .filter((val) => {
+                      if (this.state.searchTerm === "") {
+                        return val;
+                      } else if (
+                        val.tag
+                          .toLowerCase()
+                          .includes(this.state.searchTerm.toLowerCase())
+                      ) {
+                        return val;
+                      }
+                    })
+                    .filter((item) => {
+                      if (item.is_completed) {
+                        return item;
+                      }
+                    })
+                    .map((item) => (
+                      <Task
+                        key={item.id}
+                        item={item}
+                        deleteItem={this.deleteItem}
+                      />
+                    ))}
+                </div>
               </div>
               {/* Completed Card */}
             </div>

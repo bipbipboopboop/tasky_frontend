@@ -1,59 +1,61 @@
-/*
-Title:string
-Description:string
-Category:string
-Tag:string
-StartTime:int
-EndTime:int
-isUrgent:boolean
-isCompleted:boolean
-*/
-
-import React from "react";
+import * as React from "react";
 import { Link } from "react-router-dom";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const Task = (props) => {
+export default function TaskAccordion(props) {
   function handleDelete() {
     props.deleteItem(props.item);
   }
-
+  function handleComplete() {
+    props.completeItem(props.item);
+  }
   return (
-    <div
-      className="card"
-      style={{
-        width: "15rem",
-        height: "20rem",
-        borderRadius: "1rem",
-        backgroundColor: "#fc9e5a",
-      }}
-    >
-      <div className="card-body">
-        <h5
-          className="card-title p-2"
-          style={{ borderRadius: "1rem", backgroundColor: "#dc8b78" }}
+    <div>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
         >
-          {props.item.title}
-        </h5>
-        <p
-          className="card-text p-1"
-          style={{
-            borderRadius: "0.5rem",
-            height: "80%",
-            backgroundColor: "#c39797",
-          }}
-        >
-          {props.item.description}
-        </p>
-      </div>
-      <Link to={`/tasks/${props.item.id}`} className="btn btn-secondary m-2">
-        Edit
-      </Link>
-
-      <button className="btn btn-primary m-2" onClick={handleDelete}>
-        Delete
-      </button>
+          <p>{props.item.title} --------</p>
+          <small>
+            <span
+              style={{
+                backgroundColor: "#03fc98",
+                borderRadius: "1rem",
+                lineHeight: "100%",
+              }}
+            >
+              {props.item.tag}
+            </span>
+          </small>
+        </AccordionSummary>
+        <AccordionDetails>
+          <div className="d-flex flex-column">
+            <div>
+              <Link
+                to={`/tasks/${props.item.id}`}
+                className="btn btn-secondary m-2"
+              >
+                View
+              </Link>
+              {props.item.is_completed ? (
+                <button className="btn btn-primary m-2" onClick={handleDelete}>
+                  Hide
+                </button>
+              ) : (
+                <button className="btn btn-primary m-2" onClick={handleDelete}>
+                  Delete
+                </button>
+              )}
+            </div>
+            {props.item.description}
+          </div>
+        </AccordionDetails>
+      </Accordion>
     </div>
   );
-};
-
-export default Task;
+}
