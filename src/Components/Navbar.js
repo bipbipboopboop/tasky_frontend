@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoggedIn, setisLoggedIn] = useState(
-    localStorage.length > 0 ? true : false
+    localStorage.getItem("authToken") === null ||
+      localStorage.getItem("authToken").length < 100
+      ? false
+      : true
   );
   const handleSignOut = () => {
     fetch("http://localhost:3001/users/sign_out", {
@@ -12,9 +15,12 @@ const Navbar = () => {
         // "Content-Type": "application/json",
       },
       method: "DELETE",
-    }).then(() => {
+    }).then((res) => {
       localStorage.clear();
       setisLoggedIn(false);
+      if (res.status == 200) {
+        window.location.replace("http://localhost:3000");
+      }
     });
   };
   return (
@@ -23,9 +29,16 @@ const Navbar = () => {
       style={{ backgroundColor: "coral" }}
     >
       <div className="container-fluid">
-        <Link to="/tasks" className="navbar-brand">
-          Task
-        </Link>
+        {isLoggedIn ? (
+          <Link to="/tasks" className="navbar-brand">
+            Task
+          </Link>
+        ) : (
+          <Link to="/" className="navbar-brand">
+            Tasky
+          </Link>
+        )}
+
         <button
           className="navbar-toggler"
           type="button"

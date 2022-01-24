@@ -8,15 +8,20 @@ export default class SignUp extends Component {
       // user: { email: "", password: "" },
       email: "",
       password: "",
+      confirm_password: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleConfirmPasswordChange =
+      this.handleConfirmPasswordChange.bind(this);
   }
   handleSubmit(event) {
     event.preventDefault();
-    this.formSubmit(event.target);
-    this.setState({ email: "", password: "" });
+    if (this.state.password === this.state.confirm_password) {
+      this.formSubmit(event.target);
+    }
+    this.setState({ email: "", password: "", confirm_password: "" });
   }
 
   handleEmailChange(event) {
@@ -28,6 +33,11 @@ export default class SignUp extends Component {
       password: event.target.value,
     });
   }
+  handleConfirmPasswordChange(event) {
+    this.setState({
+      confirm_password: event.target.value,
+    });
+  }
   async formSubmit() {
     var data = new FormData();
     data.append("user[email]", this.state.email);
@@ -37,6 +47,10 @@ export default class SignUp extends Component {
       method: "POST",
       mode: "cors",
       body: data,
+    }).then((res) => {
+      if (res.status == 200) {
+        window.location.replace("http://localhost:3000/signin");
+      }
     });
 
     // await fetch("this.state.api_url", {
@@ -59,7 +73,7 @@ export default class SignUp extends Component {
           <h2>Sign Up</h2>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group my-2">
-              <label for="email">Email address</label>
+              <label htmlFor="email">Email address</label>
               <input
                 type="email"
                 className="form-control"
@@ -74,7 +88,7 @@ export default class SignUp extends Component {
               </small>
             </div>
             <div className="form-group my-2">
-              <label for="password">Password (Minimum 6 Characters)</label>
+              <label htmlFor="password">Password (Minimum 6 Characters)</label>
               <input
                 type="password"
                 className="form-control"
@@ -85,14 +99,14 @@ export default class SignUp extends Component {
               />
             </div>
             <div className="form-group my-2">
-              <label for="password">Confirm Password</label>
+              <label htmlFor="password">Confirm Password</label>
               <input
                 type="password"
                 className="form-control"
                 id="password"
                 placeholder="Enter your password again"
-                value={this.state.password}
-                onChange={this.handlePasswordChange}
+                value={this.state.confirm_password}
+                onChange={this.handleConfirmPasswordChange}
               />
             </div>
 

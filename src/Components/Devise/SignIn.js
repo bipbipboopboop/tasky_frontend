@@ -37,7 +37,7 @@ export default class SignIn extends Component {
       mode: "cors",
       body: data,
     }).then((res) => {
-      console.log(res.headers.get("Authorization").split(" ")[1]);
+      // console.log(res.status);
       localStorage.setItem("authToken", res.headers.get("Authorization"));
       // return res.headers.get("Authorization");
       fetch("http://localhost:3001/api/v1/tasks", {
@@ -45,7 +45,11 @@ export default class SignIn extends Component {
           Authorization: res.headers.get("Authorization"),
         },
       });
+      if (res.status == 200) {
+        window.location.replace("http://localhost:3000/tasks");
+      }
     });
+    //
   }
   render() {
     return (
@@ -57,7 +61,7 @@ export default class SignIn extends Component {
           <h1>Sign In</h1>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group my-2">
-              <label for="email">Email address</label>
+              <label htmlFor="email">Email address</label>
               <input
                 type="email"
                 className="form-control"
@@ -72,7 +76,7 @@ export default class SignIn extends Component {
               </small>
             </div>
             <div className="form-group my-2">
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 className="form-control"

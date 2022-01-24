@@ -33,7 +33,7 @@ function App() {
         <Route path="/tasks/:id" element={<TaskDetailed />} />
       </Routes>
       <Routes>
-        <Route exact path="/signin" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
       <Routes>
         <Route exact path="/signup" element={<SignUp />} />

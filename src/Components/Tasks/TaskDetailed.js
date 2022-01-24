@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-{
-  /* <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600&display=swap" rel="stylesheet">  */
-}
-const TaskDetailed = (props) => {
+
+const TaskDetailed = () => {
   const { id } = useParams();
   const [tasks, setTasks] = useState(null);
 
@@ -70,7 +66,7 @@ const TaskDetailed = (props) => {
           <div className="card-body">
             <form>
               <div className="form-group">
-                <label for="title"></label>
+                <label htmlFor="title"></label>
                 <input
                   type="text"
                   className="form-control"

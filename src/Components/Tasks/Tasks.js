@@ -96,7 +96,7 @@ class Tasks extends Component {
               if (this.state.searchTerm == "") {
                 return val;
               } else if (
-                val.title
+                val.tag
                   .toLowerCase()
                   .includes(this.state.searchTerm.toLowerCase())
               ) {
