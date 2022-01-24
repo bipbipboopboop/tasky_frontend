@@ -1,22 +1,27 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-export default class SignIn extends Component {
+
+export default class ForgetPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      api_url: `http://localhost:3001/users/sign_in`,
-      email: "",
+      api_url: `http://localhost:3001/users/password`,
       password: "",
+      confirm_password: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleConfirmPasswordChange =
+      this.handleConfirmPasswordChange.bind(this);
   }
   handleSubmit(event) {
     event.preventDefault();
-    this.formSubmit(event.target);
-    this.setState({ email: "", password: "" });
+    if (this.state.password === this.state.confirm_password) {
+      this.formSubmit(event.target);
+    }
+    this.setState({ email: "", password: "", confirm_password: "" });
   }
+
   handleEmailChange(event) {
     this.setState({ email: event.target.value });
   }
@@ -26,39 +31,46 @@ export default class SignIn extends Component {
       password: event.target.value,
     });
   }
-
+  handleConfirmPasswordChange(event) {
+    this.setState({
+      confirm_password: event.target.value,
+    });
+  }
   async formSubmit() {
     var data = new FormData();
-    data.append("user[email]", this.state.email);
-    data.append("user[password]", this.state.password);
+    data.append("email", this.state.email);
+    data.append("new_password", this.state.password);
+    data.append("confirm_password", this.state.password);
 
     await fetch(this.state.api_url, {
       method: "POST",
       mode: "cors",
       body: data,
     }).then((res) => {
-      // console.log(res.status);
-      localStorage.setItem("authToken", res.headers.get("Authorization"));
-      // return res.headers.get("Authorization");
-      fetch("http://localhost:3001/api/v1/tasks", {
-        headers: {
-          Authorization: res.headers.get("Authorization"),
-        },
-      });
+      console.log(res.json);
       if (res.status == 200) {
-        window.location.replace("http://localhost:3000/tasks");
+        window.location.replace("http://localhost:3000/signin");
       }
     });
-    //
+
+    // await fetch("this.state.api_url", {
+    //   body: {
+    //     user: { email: this.state.email, password: this.state.password },
+    //   },
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   method: "POST",
+    // });
   }
   render() {
     return (
-      <div className="row my-5 justify-content-center align-items-center">
+      <div className="row my-5 align-items-center justify-content-center">
         <div
           className="card p-5"
-          style={{ width: "20rem", borderRadius: "1rem" }}
+          style={{ width: "25rem", borderRadius: "1rem" }}
         >
-          <h1>Sign In</h1>
+          <h2>Forget password</h2>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group my-2">
               <label htmlFor="email">Email address</label>
@@ -76,7 +88,9 @@ export default class SignIn extends Component {
               </small>
             </div>
             <div className="form-group my-2">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">
+                New Password (Minimum 6 Characters)
+              </label>
               <input
                 type="password"
                 className="form-control"
@@ -86,18 +100,22 @@ export default class SignIn extends Component {
                 onChange={this.handlePasswordChange}
               />
             </div>
+            <div className="form-group my-2">
+              <label htmlFor="password">Confirm Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                placeholder="Enter your password again"
+                value={this.state.confirm_password}
+                onChange={this.handleConfirmPasswordChange}
+              />
+            </div>
 
             <button type="submit" className="btn btn-primary my-2">
-              Sign In
+              Change Password
             </button>
           </form>
-          <div>
-            <p>Don't have an account yet?</p>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-          <div className="py-2">
-            <Link to="/forgotpassword">Forgot your password?</Link>
-          </div>
         </div>
       </div>
     );

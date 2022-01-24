@@ -8,17 +8,19 @@ export default class NewTask extends Component {
       title: "",
       tag: "",
       description: "",
+      isUrgent: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleTagChange = this.handleTagChange.bind(this);
+    this.handleIsUrgentChange = this.handleIsUrgentChange.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.formSubmit(event.target);
-    this.setState({ title: "", description: "" });
+    this.setState({ title: "", description: "", tag: "" });
   }
 
   handleTitleChange(event) {
@@ -38,12 +40,24 @@ export default class NewTask extends Component {
       description: event.target.value,
     });
   }
-
+  handleIsUrgentChange(event) {
+    this.setState(
+      ({ isUrgent }) => ({
+        isUrgent: !isUrgent,
+      }),
+      function () {
+        // console.log(this.state.isUrgent);
+      }
+    );
+    // console.log(event.target.checked);
+  }
   async formSubmit() {
     var data = new FormData();
     data.append("task[title]", this.state.title);
     data.append("task[description]", this.state.description);
     data.append("task[tag]", this.state.tag);
+    data.append("task[is_urgent]", this.state.isUrgent);
+    data.append("task[is_completed]", false);
 
     await fetch(this.state.api_url, {
       method: "POST",
@@ -54,7 +68,7 @@ export default class NewTask extends Component {
       },
     }).then((res) => {
       if (res.status == 201) {
-        window.location.replace("http://localhost:3000/tasks");
+        // window.location.replace("http://localhost:3000/tasks");
       }
     });
   }
@@ -129,6 +143,17 @@ export default class NewTask extends Component {
                 <div className="col-sm-10">
                   <input type="time" className="form-control" id="end_time" />
                 </div>
+              </div>
+              <div class="form-check mx-3 my-2">
+                <label class="form-check-label" for="exampleCheck1">
+                  Urgent
+                </label>
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="urgent"
+                  onClick={this.handleIsUrgentChange}
+                />
               </div>
             </div>
 

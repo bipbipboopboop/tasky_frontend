@@ -58,6 +58,9 @@ const Navbar = () => {
               <Link to="/newtask" className="btn mx-2">
                 Create
               </Link>
+              <Link to="/settings" className="btn mx-2">
+                Settings
+              </Link>
               <button className="btn mx-2" onClick={handleSignOut}>
                 Sign Out
               </button>
