@@ -68,7 +68,7 @@ export default class NewTask extends Component {
       },
     }).then((res) => {
       if (res.status == 201) {
-        // window.location.replace("http://localhost:3000/tasks");
+        window.location.replace("http://localhost:3000/tasks");
       }
     });
   }

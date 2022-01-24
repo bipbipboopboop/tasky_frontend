@@ -55,24 +55,6 @@ class Tasks extends Component {
     });
   }
 
-  completeItem(item) {
-    var patchURL = api_url + `/${item.id}`;
-    fetch(patchURL, {
-      method: "PUT",
-      headers: {
-        Authorization: localStorage.getItem("authToken"),
-      },
-      // body:
-    })
-      .then((response) => response.json())
-      .then((response_items) => {
-        console.log(response_items);
-        this.setState({
-          items: response_items,
-        });
-      });
-  }
-
   setSearchTerm(event) {
     this.setState({ searchTerm: event.target.value });
   }
@@ -131,7 +113,7 @@ class Tasks extends Component {
                   }
                 })
                 .filter((item) => {
-                  if (!item.is_urgent) {
+                  if (!item.is_urgent && !item.is_completed) {
                     return item;
                   }
                 })
@@ -226,7 +208,6 @@ class Tasks extends Component {
                       key={item.id}
                       item={item}
                       deleteItem={this.deleteItem}
-                      completeItem={this.completeItem}
                     />
                   ))}
               </div>

@@ -21,7 +21,18 @@ export default function TaskAccordion(props) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          {props.item.title} {props.item.tag}
+          <p>{props.item.title} --------</p>
+          <small>
+            <span
+              style={{
+                backgroundColor: "#03fc98",
+                borderRadius: "1rem",
+                lineHeight: "100%",
+              }}
+            >
+              {props.item.tag}
+            </span>
+          </small>
         </AccordionSummary>
         <AccordionDetails>
           <div className="d-flex flex-column">
@@ -32,12 +43,15 @@ export default function TaskAccordion(props) {
               >
                 Edit
               </Link>
-              <button className="btn btn-success m-2" onClick={handleComplete}>
-                Done
-              </button>
-              <button className="btn btn-primary m-2" onClick={handleDelete}>
-                Delete
-              </button>
+              {props.item.is_completed ? (
+                <button className="btn btn-primary m-2" onClick={handleDelete}>
+                  Hide
+                </button>
+              ) : (
+                <button className="btn btn-primary m-2" onClick={handleDelete}>
+                  Delete
+                </button>
+              )}
             </div>
             {props.item.description}
           </div>
