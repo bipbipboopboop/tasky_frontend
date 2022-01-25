@@ -5,7 +5,7 @@ export default class NewTask extends Component {
     super(props);
     this.state = {
       api_url: `http://localhost:3001/api/v1/tasks`,
-      tasks_url: `https://cvwo-tasky.netlify.app//tasks`,
+      tasks_url: `https://cvwo-tasky.netlify.app/tasks`,
       title: "",
       tag: "",
       description: "",
