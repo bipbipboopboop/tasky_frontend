@@ -7,7 +7,7 @@ const TaskDetailed = () => {
   const task_id =
     ` https://cvwo-tasky-backend.herokuapp.com/api/v1/tasks/` + id;
   const tasks_url = `https://cvwo-tasky.netlify.app/tasks`;
-  // const task_id = `http://localhost:3001/api/v1/tasks/` + id;
+  // const task_id = `https://cvwo-tasky-backend.herokuapp.com/api/v1/tasks/` + id;
   // const tasks_url = `https://cvwo-tasky.netlify.app/tasks`;
   useEffect(() => {
     fetch(task_id, {

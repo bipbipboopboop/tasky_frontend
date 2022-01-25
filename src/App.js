@@ -22,11 +22,11 @@ function App() {
         <Navbar />
       </div>
       <Routes>
-        <Route exact path="/" element={<Welcome />} />
+        <Route path="/" element={<Welcome />} />
       </Routes>
 
       <Routes>
-        <Route exact path="/tasks" element={<Tasks />} />
+        <Route path="/tasks" element={<Tasks />} />
       </Routes>
       <Routes>
         <Route path="/newtask" element={<NewTask />} />
@@ -38,13 +38,13 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
       </Routes>
       <Routes>
-        <Route exact path="/signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
       <Routes>
-        <Route exact path="/forgotpassword" element={<ForgetPassword />} />
+        <Route path="/forgotpassword" element={<ForgetPassword />} />
       </Routes>
       <Routes>
-        <Route exact path="/settings" element={<UserSettings />} />
+        <Route path="/settings" element={<UserSettings />} />
       </Routes>
     </BrowserRouter>
   );

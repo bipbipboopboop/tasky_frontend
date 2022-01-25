@@ -4,7 +4,7 @@ export default class NewTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      api_url: `http://localhost:3001/api/v1/tasks`,
+      api_url: `https://cvwo-tasky-backend.herokuapp.com/api/v1/tasks`,
       tasks_url: `https://cvwo-tasky.netlify.app/tasks`,
       title: "",
       tag: "",
