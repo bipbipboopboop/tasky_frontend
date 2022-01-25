@@ -14,7 +14,7 @@ const Welcome = () => {
               <p>Create an account if you don't already have one</p>
             </div>
             <div>
-              <p>Instruction Details</p>
+              <p></p>
             </div>
           </div>
           {/* Block */}
@@ -24,7 +24,7 @@ const Welcome = () => {
               <p>Sign up if you do</p>
             </div>
             <div>
-              <p>Instruction Details</p>
+              <p></p>
             </div>
           </div>
           {/* Block */}
@@ -34,7 +34,7 @@ const Welcome = () => {
               <p>This is the Tasks page</p>
             </div>
             <div>
-              <p>Instruction Details</p>
+              <p></p>
             </div>
           </div>
           {/* Block */}
@@ -47,7 +47,7 @@ const Welcome = () => {
               </p>
             </div>
             <div>
-              <p>Instruction Details</p>
+              <p></p>
             </div>
           </div>
           {/* Block */}
@@ -57,7 +57,7 @@ const Welcome = () => {
               <p>Write your tasks to be done</p>
             </div>
             <div>
-              <p>Instruction Details</p>
+              <p></p>
             </div>
           </div>
           {/* Block */}
@@ -67,7 +67,7 @@ const Welcome = () => {
               <p>Tick urgent if it's important!</p>
             </div>
             <div>
-              <p>Instruction Details</p>
+              <p></p>
             </div>
           </div>
           {/* Block */}
