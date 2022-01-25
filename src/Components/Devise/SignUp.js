@@ -4,8 +4,10 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      api_url: `http://localhost:3001/users`,
-      // user: { email: "", password: "" },
+      // api_url: `http://localhost:3001/users`,
+      // sign_in_url: "http://localhost:3000/signin",
+      api_url: ` https://cvwo-tasky-backend.herokuapp.com/users`,
+      sign_in_url: "http://localhost:3000/signin",
       email: "",
       password: "",
       confirm_password: "",
@@ -49,7 +51,7 @@ export default class SignUp extends Component {
       body: data,
     }).then((res) => {
       if (res.status == 200) {
-        window.location.replace("http://localhost:3000/signin");
+        window.location.replace(this.state.sign_in_url);
       }
     });
 

@@ -4,7 +4,10 @@ export default class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      api_url: `http://localhost:3001/users/sign_in`,
+      // api_url: `http://localhost:3001/users/sign_in`,
+      // tasks_url: `http://localhost:3000/tasks`,
+      api_url: ` https://cvwo-tasky-backend.herokuapp.com/users/sign_in`,
+      tasks_url: `http://localhost:3000/tasks`,
       email: "",
       password: "",
     };
@@ -40,13 +43,13 @@ export default class SignIn extends Component {
       // console.log(res.status);
       localStorage.setItem("authToken", res.headers.get("Authorization"));
       // return res.headers.get("Authorization");
-      fetch("http://localhost:3001/api/v1/tasks", {
+      fetch(this.state.api_url, {
         headers: {
           Authorization: res.headers.get("Authorization"),
         },
       });
       if (res.status == 200) {
-        window.location.replace("http://localhost:3000/tasks");
+        window.location.replace(this.state.tasks_url);
       }
     });
     //

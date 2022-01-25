@@ -4,9 +4,13 @@ import { Link, useParams } from "react-router-dom";
 const TaskDetailed = () => {
   const { id } = useParams();
   const [tasks, setTasks] = useState(null);
-
+  const task_id =
+    ` https://cvwo-tasky-backend.herokuapp.com/api/v1/tasks/` + id;
+  const tasks_url = `http://localhost:3000/tasks`;
+  // const task_id = `http://localhost:3001/api/v1/tasks/` + id;
+  // const tasks_url = `http://localhost:3000/tasks`;
   useEffect(() => {
-    fetch(`http://localhost:3001/api/v1/tasks/` + id, {
+    fetch(task_id, {
       headers: {
         Authorization: localStorage.getItem("authToken"),
       },
@@ -27,7 +31,7 @@ const TaskDetailed = () => {
     data.append("task[description]", tasks.description);
     data.append("task[is_urgent]", tasks.is_urgent);
 
-    fetch(`http://localhost:3001/api/v1/tasks/` + id, {
+    fetch(task_id, {
       method: "PUT",
       mode: "cors",
       body: data,
@@ -37,7 +41,7 @@ const TaskDetailed = () => {
       },
     }).then((res) => {
       if (res.status == 200) {
-        window.location.replace("http://localhost:3000/tasks");
+        window.location.replace(tasks_url);
       }
     });
   };
@@ -49,7 +53,7 @@ const TaskDetailed = () => {
     data.append("task[is_completed]", true);
     data.append("task[is_urgent]", false);
 
-    fetch(`http://localhost:3001/api/v1/tasks/` + id, {
+    fetch(task_id, {
       method: "PUT",
       mode: "cors",
       body: data,
@@ -59,7 +63,7 @@ const TaskDetailed = () => {
       },
     }).then((res) => {
       if (res.status == 200) {
-        window.location.replace("http://localhost:3000/tasks");
+        window.location.replace(tasks_url);
       }
     });
   };

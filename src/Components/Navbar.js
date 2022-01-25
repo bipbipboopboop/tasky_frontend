@@ -8,18 +8,22 @@ const Navbar = () => {
       ? false
       : true
   );
+  // const sign_out_url = "http://localhost:3001/users/sign_out";
+  // const welcome_url = "http://localhost:3000";
+  const sign_out_url =
+    " https://cvwo-tasky-backend.herokuapp.com/users/sign_out";
+  const welcome_url = "http://localhost:3000";
   const handleSignOut = () => {
-    fetch("http://localhost:3001/users/sign_out", {
+    fetch(sign_out_url, {
       headers: {
         Authorization: localStorage.getItem("authToken"),
-        // "Content-Type": "application/json",
       },
       method: "DELETE",
     }).then((res) => {
       localStorage.clear();
       setisLoggedIn(false);
       if (res.status == 200) {
-        window.location.replace("http://localhost:3000");
+        window.location.replace(welcome_url);
       }
     });
   };

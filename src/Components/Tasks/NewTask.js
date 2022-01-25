@@ -5,6 +5,7 @@ export default class NewTask extends Component {
     super(props);
     this.state = {
       api_url: `http://localhost:3001/api/v1/tasks`,
+      tasks_url: `http://localhost:3000/tasks`,
       title: "",
       tag: "",
       description: "",
@@ -68,7 +69,7 @@ export default class NewTask extends Component {
       },
     }).then((res) => {
       if (res.status == 201) {
-        // window.location.replace("http://localhost:3000/tasks");
+        window.location.replace(this.state.tasks_url);
       }
     });
   }
