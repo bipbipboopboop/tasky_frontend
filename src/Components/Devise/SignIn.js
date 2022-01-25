@@ -5,9 +5,9 @@ export default class SignIn extends Component {
     super(props);
     this.state = {
       // api_url: `http://localhost:3001/users/sign_in`,
-      // tasks_url: `http://localhost:3000/tasks`,
+      // tasks_url: `https://cvwo-tasky.netlify.app//tasks`,
       api_url: ` https://cvwo-tasky-backend.herokuapp.com/users/sign_in`,
-      tasks_url: `http://localhost:3000/tasks`,
+      tasks_url: `https://cvwo-tasky.netlify.app//tasks`,
       email: "",
       password: "",
     };
