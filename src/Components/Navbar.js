@@ -8,8 +8,8 @@ const Navbar = () => {
       ? false
       : true
   );
-  // const sign_out_url = "https://cvwo-tasky-backend.herokuapp.com/users/sign_out";
-  // const welcome_url = "https://cvwo-tasky.netlify.app";
+  // const sign_out_url = "http://localhost:3001/users/sign_out";
+  // const welcome_url = "http://localhost:3000";
   const sign_out_url =
     " https://cvwo-tasky-backend.herokuapp.com/users/sign_out";
   const welcome_url = "https://cvwo-tasky.netlify.app";
@@ -22,7 +22,7 @@ const Navbar = () => {
     }).then((res) => {
       localStorage.clear();
       setisLoggedIn(false);
-      if (res.status == 200) {
+      if (res.status === 200) {
         window.location.replace(welcome_url);
       }
     });
@@ -54,6 +54,7 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 

@@ -4,10 +4,10 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // api_url: `https://cvwo-tasky-backend.herokuapp.com/users`,
-      // sign_in_url: "https://cvwo-tasky.netlify.app/signin",
       api_url: ` https://cvwo-tasky-backend.herokuapp.com/users`,
       sign_in_url: "https://cvwo-tasky.netlify.app/signin",
+      // api_url: `http://localhost:3001/users`,
+      // sign_in_url: "http://localhost:3000/signin",
       email: "",
       password: "",
       confirm_password: "",
@@ -50,20 +50,13 @@ export default class SignUp extends Component {
       mode: "cors",
       body: data,
     }).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
+        // alert("You've Signed up Successfully!");
         window.location.replace(this.state.sign_in_url);
+      } else {
+        alert("This email has been used or you have entered an invalid email");
       }
     });
-
-    // await fetch("this.state.api_url", {
-    //   body: {
-    //     user: { email: this.state.email, password: this.state.password },
-    //   },
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   method: "POST",
-    // });
   }
   render() {
     return (
@@ -97,6 +90,7 @@ export default class SignUp extends Component {
                 id="password"
                 placeholder="Enter your password"
                 value={this.state.password}
+                minLength={6}
                 onChange={this.handlePasswordChange}
               />
             </div>
@@ -108,6 +102,7 @@ export default class SignUp extends Component {
                 id="password"
                 placeholder="Enter your password again"
                 value={this.state.confirm_password}
+                minLength={6}
                 onChange={this.handleConfirmPasswordChange}
               />
             </div>

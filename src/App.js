@@ -12,7 +12,7 @@ import SignIn from "./Components/Devise/SignIn";
 import TaskDetailed from "./Components/Tasks/TaskDetailed";
 import Tasks from "./Components/Tasks/Tasks";
 import NewTask from "./Components/Tasks/NewTask";
-import ForgetPassword from "./Components/Devise/UserSettings";
+import ForgetPassword from "./Components/Devise/ForgetPassword";
 import UserSettings from "./Components/Devise/UserSettings";
 
 function App() {
@@ -40,11 +40,12 @@ function App() {
       <Routes>
         <Route path="/signup" element={<SignUp />} />
       </Routes>
-      <Routes>
-        <Route path="/forgotpassword" element={<ForgetPassword />} />
-      </Routes>
+
       <Routes>
         <Route path="/settings" element={<UserSettings />} />
+      </Routes>
+      <Routes>
+        <Route path="/forgotpassword" element={<ForgetPassword />} />
       </Routes>
     </BrowserRouter>
   );

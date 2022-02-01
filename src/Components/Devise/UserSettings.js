@@ -4,9 +4,10 @@ export default class UserSettings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // api_url: `https://cvwo-tasky-backend.herokuapp.com/users/password`,
       api_url: ` https://cvwo-tasky-backend.herokuapp.com/users/password`,
       tasks_url: `https://cvwo-tasky.netlify.app/tasks`,
+      // api_url: `http://localhost:3001/users/password`,
+      // tasks_url: `http://localhost:3000/tasks`,
       password: "",
       confirm_password: "",
     };
@@ -46,7 +47,7 @@ export default class UserSettings extends Component {
         Authorization: localStorage.getItem("authToken"),
       },
     }).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         window.location.replace(this.state.tasks_url);
       }
     });

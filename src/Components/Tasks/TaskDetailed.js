@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+import TextField from "@mui/material/TextField";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateTimePicker from "@mui/lab/DateTimePicker";
 
 const TaskDetailed = () => {
   const { id } = useParams();
@@ -7,8 +12,9 @@ const TaskDetailed = () => {
   const task_id =
     ` https://cvwo-tasky-backend.herokuapp.com/api/v1/tasks/` + id;
   const tasks_url = `https://cvwo-tasky.netlify.app/tasks`;
-  // const task_id = `https://cvwo-tasky-backend.herokuapp.com/api/v1/tasks/` + id;
-  // const tasks_url = `https://cvwo-tasky.netlify.app/tasks`;
+  // const task_id = `http://localhost:3001/api/v1/tasks/` + id;
+  // const tasks_url = `http://localhost:3000/tasks`;
+
   useEffect(() => {
     fetch(task_id, {
       headers: {
@@ -18,6 +24,7 @@ const TaskDetailed = () => {
       .then((response) => response.json())
       .then((response_data) => {
         console.log(response_data);
+        // console.log(response_data.start_time);
         setTasks(response_data);
       });
   }, []);
@@ -27,10 +34,14 @@ const TaskDetailed = () => {
     // console.log(tasks);
     var data = new FormData();
     data.append("task[title]", tasks.title);
-    data.append("task[tag]", tasks.tag);
+    data.append("task[tag]", tasks.tag === "" ? "Others" : tasks.tag);
     data.append("task[description]", tasks.description);
     data.append("task[is_urgent]", tasks.is_urgent);
-
+    data.append("task[start_time]", tasks.start_time);
+    data.append("task[end_time]", tasks.end_time);
+    for (var value of data.values()) {
+      console.log(value);
+    }
     fetch(task_id, {
       method: "PUT",
       mode: "cors",
@@ -40,7 +51,7 @@ const TaskDetailed = () => {
         // "Content-Type": "application/json",
       },
     }).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         window.location.replace(tasks_url);
       }
     });
@@ -62,7 +73,7 @@ const TaskDetailed = () => {
         // "Content-Type": "application/json",
       },
     }).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         window.location.replace(tasks_url);
       }
     });
@@ -73,6 +84,8 @@ const TaskDetailed = () => {
       title: e.target.value,
       description: prevState.description,
       tag: prevState.tag,
+      start_time: prevState.start_time,
+      end_time: prevState.end_time,
       created_at: prevState.created_at,
       updated_at: prevState.updated_at,
     }));
@@ -84,6 +97,8 @@ const TaskDetailed = () => {
       title: prevState.title,
       description: e.target.value,
       tag: prevState.tag,
+      start_time: prevState.start_time,
+      end_time: prevState.end_time,
       created_at: prevState.created_at,
       updated_at: prevState.updated_at,
     }));
@@ -96,6 +111,8 @@ const TaskDetailed = () => {
       description: prevState.description,
       tag: e.target.value,
       is_urgent: prevState.is_urgent,
+      start_time: prevState.start_time,
+      end_time: prevState.end_time,
       created_at: prevState.created_at,
       updated_at: prevState.updated_at,
     }));
@@ -106,7 +123,37 @@ const TaskDetailed = () => {
       title: prevState.title,
       description: prevState.description,
       tag: prevState.tag,
-      is_urgent: e.target.value,
+      is_urgent: e.target.checked,
+      start_time: prevState.start_time,
+      end_time: prevState.end_time,
+      created_at: prevState.created_at,
+      updated_at: prevState.updated_at,
+    }));
+  };
+  const handleStartTimeChange = (e) => {
+    console.log("The start time is change to " + e.toISOString());
+    setTasks((prevState) => ({
+      id: prevState.id,
+      title: prevState.title,
+      description: prevState.description,
+      tag: prevState.tag,
+      is_urgent: prevState.is_urgent,
+      start_time: e.toISOString(),
+      end_time: prevState.end_time,
+      created_at: prevState.created_at,
+      updated_at: prevState.updated_at,
+    }));
+  };
+  const handleEndTimeChange = (e) => {
+    // console.log("The end time is change to " + e.toISOString());
+    setTasks((prevState) => ({
+      id: prevState.id,
+      title: prevState.title,
+      description: prevState.description,
+      tag: prevState.tag,
+      is_urgent: prevState.is_urgent,
+      start_time: prevState.start_time,
+      end_time: e.toISOString(),
       created_at: prevState.created_at,
       updated_at: prevState.updated_at,
     }));
@@ -155,7 +202,7 @@ const TaskDetailed = () => {
               </label>
               <div className="col-sm-10">
                 <input
-                  type="text"
+                  type="textarea"
                   className="form-control"
                   id="description"
                   placeholder="Description"
@@ -170,7 +217,14 @@ const TaskDetailed = () => {
                   Start
                 </label>
                 <div className="col-sm-10">
-                  <input type="time" className="form-control" id="start_time" />
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DateTimePicker
+                      renderInput={(params) => <TextField {...params} />}
+                      value={tasks.start_time}
+                      disablePast
+                      onChange={handleStartTimeChange}
+                    />
+                  </LocalizationProvider>
                 </div>
               </div>
               <div className="col">
@@ -178,18 +232,25 @@ const TaskDetailed = () => {
                   End
                 </label>
                 <div className="col-sm-10">
-                  <input type="time" className="form-control" id="end_time" />
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DateTimePicker
+                      renderInput={(params) => <TextField {...params} />}
+                      value={tasks.end_time}
+                      disablePast
+                      minDateTime={new Date(tasks.start_time).getTime()}
+                      onChange={handleEndTimeChange}
+                    />
+                  </LocalizationProvider>
                 </div>
               </div>
-              <div class="form-check mx-3 my-2">
-                <label class="form-check-label" for="exampleCheck1">
-                  Urgent
-                </label>
+              <div className="form-check mx-3 my-2">
+                <label className="form-check-label">Urgent</label>
                 <input
                   type="checkbox"
-                  class="form-check-input"
+                  className="form-check-input"
                   id="urgent"
-                  onClick={handleIsUrgentChange}
+                  checked={tasks.is_urgent}
+                  onChange={handleIsUrgentChange}
                 />
               </div>
             </div>

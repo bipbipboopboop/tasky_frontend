@@ -1,21 +1,34 @@
 import React, { Component } from "react";
 
+import TextField from "@mui/material/TextField";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+
 export default class NewTask extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       api_url: `https://cvwo-tasky-backend.herokuapp.com/api/v1/tasks`,
       tasks_url: `https://cvwo-tasky.netlify.app/tasks`,
+      // api_url: `http://localhost:3001/api/v1/tasks`,
+      // tasks_url: `http://localhost:3000/tasks`,
+
       title: "",
       tag: "",
       description: "",
       isUrgent: false,
+      start_time: new Date().toISOString(),
+      end_time: new Date().toISOString(),
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleTagChange = this.handleTagChange.bind(this);
     this.handleIsUrgentChange = this.handleIsUrgentChange.bind(this);
+    this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
+    this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
   }
 
   handleSubmit(event) {
@@ -41,24 +54,35 @@ export default class NewTask extends Component {
       description: event.target.value,
     });
   }
-  handleIsUrgentChange(event) {
-    this.setState(
-      ({ isUrgent }) => ({
-        isUrgent: !isUrgent,
-      }),
-      function () {
-        // console.log(this.state.isUrgent);
-      }
-    );
-    // console.log(event.target.checked);
+  handleIsUrgentChange() {
+    this.setState(({ isUrgent }) => ({
+      isUrgent: !isUrgent,
+    }));
   }
+  handleStartTimeChange(e) {
+    this.setState({
+      start_time: e.toISOString(),
+      end_time:
+        new Date(this.state.start_time).getTime() <
+        new Date(this.state.end_time).getTime()
+          ? this.state.end_time
+          : e.toISOString(),
+    });
+  }
+  handleEndTimeChange(e) {
+    this.setState({ end_time: e.toISOString() });
+    // console.log("The end time is " + this.state.end_time);
+  }
+
   async formSubmit() {
     var data = new FormData();
     data.append("task[title]", this.state.title);
     data.append("task[description]", this.state.description);
-    data.append("task[tag]", this.state.tag);
+    data.append("task[tag]", this.state.tag === "" ? "Others" : this.state.tag);
     data.append("task[is_urgent]", this.state.isUrgent);
     data.append("task[is_completed]", false);
+    data.append("task[start_time]", this.state.start_time);
+    data.append("task[end_time]", this.state.end_time);
 
     await fetch(this.state.api_url, {
       method: "POST",
@@ -68,7 +92,7 @@ export default class NewTask extends Component {
         Authorization: localStorage.getItem("authToken"),
       },
     }).then((res) => {
-      if (res.status == 201) {
+      if (res.status === 201) {
         window.location.replace(this.state.tasks_url);
       }
     });
@@ -134,7 +158,14 @@ export default class NewTask extends Component {
                   Start
                 </label>
                 <div className="col-sm-10">
-                  <input type="time" className="form-control" id="start_time" />
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DateTimePicker
+                      renderInput={(params) => <TextField {...params} />}
+                      value={this.state.start_time}
+                      onChange={this.handleStartTimeChange}
+                      disablePast
+                    />
+                  </LocalizationProvider>
                 </div>
               </div>
               <div className="col">
@@ -142,16 +173,21 @@ export default class NewTask extends Component {
                   End
                 </label>
                 <div className="col-sm-10">
-                  <input type="time" className="form-control" id="end_time" />
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DateTimePicker
+                      renderInput={(params) => <TextField {...params} />}
+                      value={this.state.end_time}
+                      onChange={this.handleEndTimeChange}
+                      minDateTime={new Date(this.state.start_time).getTime()}
+                    />
+                  </LocalizationProvider>
                 </div>
               </div>
-              <div class="form-check mx-3 my-2">
-                <label class="form-check-label" for="exampleCheck1">
-                  Urgent
-                </label>
+              <div className="form-check mx-3 my-2">
+                <label className="form-check-label">Urgent</label>
                 <input
                   type="checkbox"
-                  class="form-check-input"
+                  className="form-check-input"
                   id="urgent"
                   onClick={this.handleIsUrgentChange}
                 />

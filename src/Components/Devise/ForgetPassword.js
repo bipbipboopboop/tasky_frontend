@@ -6,8 +6,8 @@ export default class ForgetPassword extends Component {
     this.state = {
       api_url: ` https://cvwo-tasky-backend.herokuapp.com/users/password`,
       tasks_url: `https://cvwo-tasky.netlify.app/tasks`,
-      // api_url: `https://cvwo-tasky-backend.herokuapp.com/users/password`,
-      // tasks_url: `https://cvwo-tasky.netlify.app/tasks`,
+      // api_url: `http://localhost:3001/users/password`,
+      // tasks_url: `http://localhost:3000/tasks`,
       password: "",
       confirm_password: "",
     };
@@ -50,20 +50,10 @@ export default class ForgetPassword extends Component {
       mode: "cors",
       body: data,
     }).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         window.location.replace(this.state.tasks_url);
       }
     });
-
-    // await fetch("this.state.api_url", {
-    //   body: {
-    //     user: { email: this.state.email, password: this.state.password },
-    //   },
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   method: "POST",
-    // });
   }
   render() {
     return (
@@ -98,6 +88,7 @@ export default class ForgetPassword extends Component {
                 className="form-control"
                 id="password"
                 placeholder="Enter your password"
+                minLength={6}
                 value={this.state.password}
                 onChange={this.handlePasswordChange}
               />
@@ -109,6 +100,7 @@ export default class ForgetPassword extends Component {
                 className="form-control"
                 id="password"
                 placeholder="Enter your password again"
+                minLength={6}
                 value={this.state.confirm_password}
                 onChange={this.handleConfirmPasswordChange}
               />
