@@ -5,7 +5,7 @@ export default class UserSettings extends Component {
     super(props);
     this.state = {
       api_url: ` https://cvwo-tasky-backend.herokuapp.com/users/password`,
-      tasks_url: `https://cvwo-tasky.netlify.app/tasks`,
+      tasks_url: `https://cvwo-tasky.netlify.app/signin`,
       // api_url: `http://localhost:3001/users/password`,
       // tasks_url: `http://localhost:3000/tasks`,
       password: "",

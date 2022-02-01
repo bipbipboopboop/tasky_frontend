@@ -5,9 +5,9 @@ export default class ForgetPassword extends Component {
     super(props);
     this.state = {
       api_url: ` https://cvwo-tasky-backend.herokuapp.com/users/password`,
-      tasks_url: `https://cvwo-tasky.netlify.app/tasks`,
+      sign_in_url: `https://cvwo-tasky.netlify.app/signin`,
       // api_url: `http://localhost:3001/users/password`,
-      // tasks_url: `http://localhost:3000/tasks`,
+      // sign_in_url: `http://localhost:3000/signin`,
       password: "",
       confirm_password: "",
     };
@@ -51,7 +51,7 @@ export default class ForgetPassword extends Component {
       body: data,
     }).then((res) => {
       if (res.status === 200) {
-        window.location.replace(this.state.tasks_url);
+        window.location.replace(this.state.sign_in_url);
       }
     });
   }

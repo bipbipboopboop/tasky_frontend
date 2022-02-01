@@ -8,11 +8,11 @@ const Navbar = () => {
       ? false
       : true
   );
-  // const sign_out_url = "http://localhost:3001/users/sign_out";
-  // const welcome_url = "http://localhost:3000";
-  const sign_out_url =
-    " https://cvwo-tasky-backend.herokuapp.com/users/sign_out";
-  const welcome_url = "https://cvwo-tasky.netlify.app";
+  const sign_out_url = "http://localhost:3001/users/sign_out";
+  const welcome_url = "http://localhost:3000";
+  // const sign_out_url =
+  //   " https://cvwo-tasky-backend.herokuapp.com/users/sign_out";
+  // const welcome_url = "https://cvwo-tasky.netlify.app";
   const handleSignOut = () => {
     fetch(sign_out_url, {
       headers: {
